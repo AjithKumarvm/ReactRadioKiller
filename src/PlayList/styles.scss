@@ -1,0 +1,46 @@
+$gap: 20px;
+.playList{
+    padding: $gap;
+    height: 250px;
+    overflow: auto;
+    .list{
+        padding: $gap / 2;
+        cursor: pointer;
+        font-size: 12px;
+        border-radius: $gap;
+        position: relative;
+        &:hover{
+            background-color: rgba(0, 0, 0, 0.048);
+            .lang{
+                opacity: 1;
+            }  
+        }
+        transition-duration: 300ms;
+        &:active{
+            transition-duration: 300ms;
+            transform: scale(.9);
+        }
+        &.selected{
+            background-color: rgba(0, 0, 0, 0.048);
+            &.active{
+                background-color: rgba(0, 0, 0, 0.096);
+            }  
+            .lang{
+                opacity: 1;
+            }  
+        }
+        &.placeholder{
+            margin-bottom: 5px;
+            min-height: 30px;
+        }
+        .lang{
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 0px 5px;
+            opacity: .5;
+        }
+    }
+}

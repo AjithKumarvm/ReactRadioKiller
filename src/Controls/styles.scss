@@ -1,0 +1,162 @@
+$playIconSize: 60px;
+$borderSize: $playIconSize / 2;
+$controlColor: white;
+$error: #ff5252;
+$gap: 30px;
+$animationDuration: 1s;
+$playerMinHeight: 50px;
+$playerMaxHeight: 120px;
+
+.playerControls {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  //   background: linear-gradient(to bottom, #11c511, #0aca0a);
+  background: linear-gradient(to bottom, #ba11c5, #ca0a6b);
+  opacity: .5;
+  box-shadow: 0px -8px 17px 0px #001b0026;
+  border-radius: $gap;
+  border-top-left-radius: $gap;
+  border-top-right-radius: $gap;
+  padding: $gap;
+  padding-bottom: 5px;
+  padding-top: 0px;
+  transition-duration: 3s;
+  &.controlAnim {
+    animation: changeGrad $animationDuration forwards;
+  }
+
+  .innerWrapper {
+    overflow: hidden;
+    padding-top: $gap;
+    // padding-bottom: $gap;
+    box-sizing: content-box;
+    height: $playerMinHeight;
+    padding-bottom: $gap;
+    &.anim {
+      animation: expand 1s forwards;
+    }
+  }
+
+  .actions {
+    display: inline-block;
+    vertical-align: top;
+    transition-duration: 300ms;
+    max-width: 60px;
+    &:hover{
+        transform: scale(1.1);
+        transition-duration: 300ms;
+    }
+    &:active{
+        transform: scale(.9);
+        transition-duration: 300ms;
+    }
+  }
+  .playStopControls {
+    border: 0;
+    background: transparent;
+    // box-sizing: border-box;
+    box-sizing: content-box;
+    width: $playIconSize;
+    height: $playIconSize;
+    transition: $animationDuration all ease;
+    cursor: pointer;
+    border-style: solid;
+    &.stop {
+      width: 0px;
+      height: 0px;
+      border-width: $borderSize;
+      border-color: $controlColor;
+      transition: $animationDuration all ease;
+      border-radius: 7px;
+      transition: $animationDuration all ease;
+      animation: rotateHalf $animationDuration linear;
+    }
+
+    &.stalled {
+      width: 0px;
+      height: 0px;
+      border-width: 0 $borderSize $playIconSize $borderSize;
+      border-color: transparent transparent $error transparent;
+      transition: $animationDuration all ease;
+      animation: rotateHalf2 $animationDuration linear;
+    }
+
+    &.play {
+      width: 0px;
+      height: 0px;
+      border-width: $borderSize 0 $borderSize $playIconSize;
+      border-color: transparent transparent transparent $controlColor;
+      transition: $animationDuration all ease;
+      animation: rotateHalf3 $animationDuration linear;
+    }
+
+    &.buffer {
+      border-radius: 50%;
+      //   border-color: $controlColor;
+      border-color: transparent transparent transparent $controlColor;
+      border-width: $borderSize;
+      width: $playIconSize / 2;
+      height: $playIconSize / 2;
+      border-width: $borderSize / 2;
+      //   background-color: $controlColor;
+      animation: rotate $animationDuration linear infinite;
+      transition: $animationDuration all ease;
+    }
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    @keyframes rotateHalf {
+      0% {
+        transform: rotate(180deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    @keyframes rotateHalf2 {
+      0% {
+        transform: rotate(180deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    @keyframes rotateHalf3 {
+      0% {
+        transform: rotate(180deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+  @keyframes expand {
+    0% {
+      height: $playerMinHeight;
+    }
+
+    100% {
+      height: $playerMaxHeight;
+    }
+  }
+
+  @keyframes changeGrad {
+    0% {
+      opacity: 0.5;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+}

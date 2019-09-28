@@ -1,0 +1,57 @@
+$playIconSize: 20px;
+$borderSize: $playIconSize / 2;
+$barSize: $playIconSize / 4;
+$controlColor: white;
+
+.prevNextControl {
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 19px;
+  &.prev{
+    transform: rotate(180deg);
+    margin-right: 20px;
+    transition-duration: 300ms;
+    &:hover{
+        transform: scale(1.1) rotate(180deg);
+        transition-duration: 300ms;
+    }
+    &:active{
+      transform: scale(.9) rotate(180deg);
+      transition-duration: 300ms;
+  }
+  }
+  &.next{
+    margin-left: 20px;
+    transition-duration: 300ms;
+    &:hover{
+        transform: scale(1.1);
+        transition-duration: 300ms;
+    }
+    &:active{
+      transform: scale(.9);
+      transition-duration: 300ms;
+  }
+  }
+  .triangle {
+    border: 0;
+    background: transparent;
+    box-sizing: border-box;
+    width: $playIconSize;
+    height: $playIconSize;
+    transition: 100ms all ease;
+    cursor: pointer;
+    border-style: solid;
+    border-width: $borderSize 0 $borderSize $playIconSize;
+    border-color: transparent transparent transparent $controlColor;
+    transition: 100ms all ease;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .bar {
+    width: $barSize;
+    height: $playIconSize;
+    background-color: $controlColor;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
