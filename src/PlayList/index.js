@@ -21,12 +21,12 @@ class PlayList extends React.PureComponent {
   }
   componentDidUpdate (prevProps) {
     if (!prevProps.currentStation && this.props.playList.length) {
-      this.player.play()()
+      this.player.play()({autoPlay: true})
     }
   }
   render () {
     if (this.props.playListLoader) {
-      return <div className='playList'>
+      return <div className='playList hideScroll'>
         <div className='list placeholder selected active' />
         <div className='list placeholder selected' />
         <div className='list placeholder selected' />
@@ -37,7 +37,7 @@ class PlayList extends React.PureComponent {
       </div>
     }
     return (
-      <div className='playList'>
+      <div className='playList hideScroll'>
         {this.props.playList.map(station => {
           const classNames = ['list']
           this.checkIfSelected(station.id) && classNames.push('selected')
@@ -62,7 +62,8 @@ export default connect(
   }),
   dispatch => ({
     getPlayList: () => {
-      fetch('https://www.mocky.io/v2/5d8367f13400003322f4a489')
+      // fetch('https://www.mocky.io/v2/5d8367f13400003322f4a489')
+      fetch('https://firebasestorage.googleapis.com/v0/b/radio-streamer-6111f.appspot.com/o/playlist.json?alt=media')
         .then(resp => resp.json())
         .then(resp => {
           dispatch(updatePlaylist({ list: resp.music }))

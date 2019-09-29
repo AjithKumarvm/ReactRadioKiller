@@ -9,8 +9,11 @@ $gap: 20px;
         font-size: 12px;
         border-radius: $gap;
         position: relative;
+        transition-duration: 300ms;
         &:hover{
             background-color: rgba(0, 0, 0, 0.048);
+            transition-duration: 300ms;
+            transform: scale(1.05);
             .lang{
                 opacity: 1;
             }  

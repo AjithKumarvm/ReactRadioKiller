@@ -4,7 +4,6 @@ import { updatePlayerStatus, updatePlayerTime, setStation } from '../actions'
 
 let playerTimeStamp = 0
 class Player extends React.PureComponent {
-
   attemptTimer = 0
   componentDidMount () {
     this.player = this.refs.player
@@ -13,10 +12,11 @@ class Player extends React.PureComponent {
     if (status === 'PLAYING' && e && e.timeStamp) {
       playerTimeStamp = e.timeStamp
       this.attemptTimer = 0
+      localStorage.setItem('currentStationId', this.props.currentStation.id)
     }
     this.props.onStatus(status)(e)
   }
-  play = station => (params = { retry: false }) => {
+  play = station => (params = { retry: false, autoPlay: false }) => {
     if (params.retry) {
       this.onStatus('WAITING')()
     } else {
@@ -24,6 +24,13 @@ class Player extends React.PureComponent {
     }
     this.onStatus('PAUSE')()
     const { player } = this.refs
+    if (params.autoPlay && localStorage.getItem('currentStationId')) {
+      const currentStationId = localStorage.getItem('currentStationId')
+      const filtered = this.props.playList.filter(({ id }) => id === currentStationId)
+      if (filtered.length) {
+        station = filtered[0]
+      }
+    }
     station = station || this.props.currentStation
     player.src = station.source
     player.onloadedmetadata = this.onMeta
@@ -62,10 +69,11 @@ class Player extends React.PureComponent {
 }
 
 export default connect(
-  ({ playerStatus, playerTime, currentStation }) => ({
+  ({ playerStatus, playerTime, currentStation, playList }) => ({
     playerStatus,
     playerTime,
-    currentStation
+    currentStation,
+    playList
   }),
   dispatch => ({
     setStation: station => {
