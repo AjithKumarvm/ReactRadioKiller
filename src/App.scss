@@ -5,17 +5,26 @@ $gap: 30px;
   margin-top: $gap;
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.12);
   border-radius: $gap;
-  &.rkAnim{
+  background-color: white;
+  &.rkAnim {
     transition-duration: 300ms;
     &-enter {
-      opacity: 0;
-      transform: scale(0.9);
+      width: 0px;
       transition-duration: 300ms;
     }
     &-enter-active {
-      opacity: 1;
-      transform: scale(1);
+      width: 320px;
       transition-duration: 300ms;
     }
   }
+}
+
+.colored {
+  width: 100%;
+  text-align: center;
+  line-height: 1;
+  background: -webkit-linear-gradient(#ba11c5, #ca0a6b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

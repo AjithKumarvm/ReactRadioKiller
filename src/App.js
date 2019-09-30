@@ -19,7 +19,7 @@ class App extends React.PureComponent {
     this.setState({
       show: true
     })
-  } 
+  }
   player = React.createRef()
   play = station => {
     this.player.current.play(station)()
@@ -27,15 +27,18 @@ class App extends React.PureComponent {
   getPlayer = () => this.player.current
   render () {
     return (
-      <CSSTransition in={this.state.show} timeout={300} classNames='rkAnim'>
-        <div className='rkContainer'>
-          <Provider store={store}>
-            <Player ref={this.player} />
-            <PlayList play={this.play} getPlayer={this.getPlayer} />
-            <Controls getPlayer={this.getPlayer} />
-          </Provider>
-        </div>
-      </CSSTransition>
+      <>
+        <h1 className='colored'>RADIO KILLER</h1>
+        <CSSTransition in={this.state.show} timeout={300} classNames='rkAnim'>
+          <div className='rkContainer'>
+            <Provider store={store}>
+              <Player ref={this.player} />
+              <PlayList play={this.play} getPlayer={this.getPlayer} />
+              <Controls getPlayer={this.getPlayer} />
+            </Provider>
+          </div>
+        </CSSTransition>
+      </>
     )
   }
 }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { updatePlaylist } from '../actions'
 import { playList } from '../dummy'
 import './styles.scss'
+import PlayListControls from './PlayListControls'
 
 class PlayList extends React.PureComponent {
   componentDidMount () {
@@ -21,30 +22,41 @@ class PlayList extends React.PureComponent {
   }
   componentDidUpdate (prevProps) {
     if (!prevProps.currentStation && this.props.playList.length) {
-      this.player.play()({autoPlay: true})
+      this.player.play()({ autoPlay: true })
     }
   }
   render () {
     if (this.props.playListLoader) {
-      return <div className='playList hideScroll'>
-        <div className='list placeholder selected active' />
-        <div className='list placeholder selected' />
-        <div className='list placeholder selected' />
-        <div className='list placeholder selected' />
-        <div className='list placeholder selected' />
-        <div className='list placeholder selected' />
-        <div className='list placeholder selected' />
-      </div>
+      return (
+        <div className='playList hideScroll'>
+          <div className='list placeholder selected active' />
+          <div className='list placeholder selected' />
+          <div className='list placeholder selected' />
+          <div className='list placeholder selected' />
+          <div className='list placeholder selected' />
+          <div className='list placeholder selected' />
+          <div className='list placeholder selected' />
+        </div>
+      )
     }
     return (
       <div className='playList hideScroll'>
         {this.props.playList.map(station => {
           const classNames = ['list']
           this.checkIfSelected(station.id) && classNames.push('selected')
-          this.checkIfPlaying(station.id) && classNames.push('active')
           return (
-            <div className={classNames.join(' ')} key={station.id} onClick={this.player.play(station)}>
-              {station.title} <div className='lang'>{station.genre.slice(0, 3)}</div>
+            <div
+              className={classNames.join(' ')}
+              key={station.id}
+              onClick={this.player.play(station)}
+            >
+              <PlayListControls
+                playerStatus={this.props.playerStatus}
+                current={this.checkIfSelected(station.id)}
+                selected={this.checkIfSelected(station.id)}
+              />
+              {station.title}{' '}
+              <div className='lang'>{station.genre.slice(0, 3)}</div>
             </div>
           )
         })}
@@ -63,7 +75,9 @@ export default connect(
   dispatch => ({
     getPlayList: () => {
       // fetch('https://www.mocky.io/v2/5d8367f13400003322f4a489')
-      fetch('https://firebasestorage.googleapis.com/v0/b/radio-streamer-6111f.appspot.com/o/playlist.json?alt=media')
+      fetch(
+        'https://firebasestorage.googleapis.com/v0/b/radio-streamer-6111f.appspot.com/o/playlist.json?alt=media'
+      )
         .then(resp => resp.json())
         .then(resp => {
           dispatch(updatePlaylist({ list: resp.music }))
