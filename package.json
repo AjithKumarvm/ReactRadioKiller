@@ -16,7 +16,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "cp -r build ../AjithKumarvm.github.io/radiokiller"
+    "deploy": "rm -rf ../AjithKumarvm.github.io/radiokiller && rm -rf build && yarn build && cp -r build ../AjithKumarvm.github.io/radiokiller"
   },
   "eslintConfig": {
     "extends": "react-app"
