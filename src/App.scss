@@ -28,3 +28,21 @@ $gap: 30px;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.offlineMessage{
+  width: 100%;
+  color: white;
+  background-color: rgb(148, 5, 5);
+  font-size: 11px;
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  padding: 4px;
+  text-align: center;
+}
+
+.offline{
+  filter: grayscale(1) opacity(0.5);
+  transition-duration: 300ms;
+  
+}

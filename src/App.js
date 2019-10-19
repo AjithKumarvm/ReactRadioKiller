@@ -1,16 +1,11 @@
 import React from 'react'
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
-import { reducer } from './reducer'
+
 import './App.scss'
 import PlayList from './PlayList'
 import Player from './Player'
 import Controls from './Controls'
-
-const store = createStore(reducer)
-window.store = store
-
 class App extends React.PureComponent {
   state = {
     show: false
@@ -25,22 +20,30 @@ class App extends React.PureComponent {
     this.player.current.play(station)()
   }
   getPlayer = () => this.player.current
+  offlineMessage = () => !this.props.onlineStatus ? (
+      <div className='offlineMessage'>
+        YOU ARE OFFLINE, MUSIC WILL RESUME WHEN YOU ARE ONLINE
+      </div>
+    ) : null
   render () {
     return (
       <>
-        <h1 className='colored'>RADIO KILLER</h1>
-        <CSSTransition in={this.state.show} timeout={300} classNames='rkAnim'>
-          <div className='rkContainer'>
-            <Provider store={store}>
+        <div className={!this.props.onlineStatus ? 'offline' : ''}>
+          <h1 className='colored'>RADIO KILLER</h1>
+          <CSSTransition in={this.state.show} timeout={300} classNames='rkAnim'>
+            <div className='rkContainer'>
               <Player ref={this.player} />
               <PlayList play={this.play} getPlayer={this.getPlayer} />
               <Controls getPlayer={this.getPlayer} />
-            </Provider>
-          </div>
-        </CSSTransition>
+            </div>
+          </CSSTransition>
+        </div>
+        <this.offlineMessage />
       </>
     )
   }
 }
 
-export default App
+export default connect(({ onlineStatus }) => ({
+  onlineStatus
+}))(App)
