@@ -4,7 +4,9 @@ const defaultState = {
   playerStatus: 'INITIALISING',
   playListLoader: true,
   playList: [],
-  currentStation: null
+  currentStation: null,
+  onlineStatus: navigator.onLine,
+  userIntent: 'PLAY'
 }
 
 const reducer = (state = defaultState, action) => {
@@ -36,6 +38,20 @@ const reducer = (state = defaultState, action) => {
       return {
         ...state,
         currentStation: action.station
+      }
+    }
+
+    case 'UPDATE_ONLINE_STATUS': {
+      return {
+        ...state,
+        onlineStatus: action.status
+      }
+    }
+
+    case 'UPDATE_USER_INTENT': {
+      return {
+        ...state,
+        userIntent: action.intent
       }
     }
 

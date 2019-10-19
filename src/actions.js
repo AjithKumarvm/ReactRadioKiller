@@ -17,3 +17,13 @@ export const setStation = ({station}) => ({
     type: 'SET_STATION',
     station
 })
+
+export const updateOnlineStatus = ({status}) => ({
+    type: 'UPDATE_ONLINE_STATUS',
+    status
+})
+
+export const updateUserIntent = ({intent}) => ({
+    type: 'UPDATE_USER_INTENT',
+    intent
+})

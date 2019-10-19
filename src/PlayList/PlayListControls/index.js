@@ -5,7 +5,6 @@ import {CSSTransition} from 'react-transition-group'
 export default class PlayListControls extends React.Component{
     state = {show: false}
     componentDidUpdate (prevProps) {
-        console.log('componentDidUpdate', prevProps, this.props)
         const show = this.props.playerStatus === 'PLAYING'
         show !== this.state.show && this.setState({
             show

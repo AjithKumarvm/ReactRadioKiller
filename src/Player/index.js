@@ -1,17 +1,27 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { updatePlayerStatus, updatePlayerTime, setStation } from '../actions'
+import { updatePlayerStatus, updatePlayerTime, setStation, updateOnlineStatus } from '../actions'
 
 let playerTimeStamp = 0
 class Player extends React.PureComponent {
-  attemptTimer = 0
   componentDidMount () {
     this.player = this.refs.player
+    window.addEventListener('online',  this.updateIndicator)
+    window.addEventListener('offline', this.props.updateIndicator)
+  }
+  componentWillUnmount () {
+    window.removeEventListener('online',  this.props.updateIndicator)
+    window.removeEventListener('offline', this.props.updateIndicator)
+  }
+  updateIndicator = () => {
+    if (this.props.playerStatus !== 'PLAYING' && this.props.userIntent === 'PLAY' && window.navigator.onLine) {
+      this.play()({ retry: true })
+    }
+    this.props.updateIndicator()
   }
   onStatus = status => e => {
     if (status === 'PLAYING' && e && e.timeStamp) {
       playerTimeStamp = e.timeStamp
-      this.attemptTimer = 0
       localStorage.setItem('currentStationId', this.props.currentStation.id)
     }
     this.props.onStatus(status)(e)
@@ -19,8 +29,6 @@ class Player extends React.PureComponent {
   play = station => (params = { retry: false, autoPlay: false }) => {
     if (params.retry) {
       this.onStatus('WAITING')()
-    } else {
-      this.attemptTimer = 0
     }
     this.onStatus('PAUSE')()
     const { player } = this.refs
@@ -39,13 +47,13 @@ class Player extends React.PureComponent {
     player.onplaying = this.onStatus('PLAYING')
     player.onpause = this.onStatus('PAUSE')
     player.onwaiting = this.onStatus('WAITING')
-    player.ondurationchange = this.onStatus('DURATION')
     player.onstalled = this.onStatus('STALLED')
     player.onerror = this.onStatus('ERROR')
     player.ontimeupdate = this.props.onTimeUpdate
     try {
       player.play().catch(this.onError)
     } catch (e) {
+      console.error('player', e)
       this.onError(e)
     }
 
@@ -53,11 +61,6 @@ class Player extends React.PureComponent {
   }
   onError = e => {
     this.onStatus('ERROR')()
-    this.attemptTimer = this.attemptTimer + 3000
-    setTimeout(() => {
-      this.props.playerStatus !== 'PLAYING' && this.play()({ retry: true })
-    }, this.attemptTimer)
-    console.error('EERR', e)
   }
   pause = () => {
     const { player } = this.refs
@@ -69,21 +72,26 @@ class Player extends React.PureComponent {
 }
 
 export default connect(
-  ({ playerStatus, playerTime, currentStation, playList }) => ({
+  ({ playerStatus, playerTime, currentStation, playList, userIntent }) => ({
     playerStatus,
     playerTime,
     currentStation,
-    playList
+    playList,
+    userIntent
   }),
   dispatch => ({
     setStation: station => {
       dispatch(setStation(station))
     },
     onStatus: status => e => {
+      console.log('onStatus', status, e)
       dispatch(updatePlayerStatus({ status }))
     },
     onTimeUpdate: ({ timeStamp }) => {
       dispatch(updatePlayerTime({ timeStamp: timeStamp - playerTimeStamp }))
+    },
+    updateIndicator: () => {
+      dispatch(updateOnlineStatus({status: navigator.onLine}))
     }
   }),
   null,

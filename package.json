@@ -15,7 +15,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "cp -r build ../AjithKumarvm.github.io/radiokiller"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -31,5 +32,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "homepage": ".",
+  "devDependencies": {
+    "gh-pages": "^2.1.1"
   }
 }

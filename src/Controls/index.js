@@ -4,17 +4,19 @@ import './styles.scss'
 import './prev_next.scss'
 import PlayerMeta from './PlayerMeta'
 import PlayerTimer from './PlayerTimer'
+import {updateUserIntent} from './../actions'
 
 class Controls extends React.PureComponent {
   componentDidMount () {
     this.player = this.props.getPlayer()
-    console.log('this.player', this.player)
   }
   action = () => {
-    if (this.props.playerStatus === 'PLAYING') {
+    if (this.props.playerStatus === 'PLAYING' || this.props.playerStatus === 'WAITING') {
       this.player.pause()
+      this.props.updateUserIntent('PAUSE')
     } else {
       this.player.play()()
+      this.props.updateUserIntent('PLAY')
     }
   }
   playerIcon = () => {
@@ -22,7 +24,7 @@ class Controls extends React.PureComponent {
       return <div className='playStopControls stop' />
     } else if (this.props.playerStatus === 'PAUSE') {
       return <div className='playStopControls play' />
-    } else if (this.props.playerStatus === 'STALLED') {
+    } else if (this.props.playerStatus === 'STALLED' || this.props.playerStatus === 'ERROR') {
       return <div className='playStopControls stalled' />
     } else {
       return <div className='playStopControls buffer' />
@@ -43,6 +45,7 @@ class Controls extends React.PureComponent {
         station = this.props.playList[this.props.currentStationIndex - 1]
       }
     }
+    this.props.updateUserIntent('PLAY')
     this.player.play(station)()
   }
 
@@ -102,13 +105,17 @@ class Controls extends React.PureComponent {
 }
 
 export default connect(
-  ({ playerStatus, playList, currentStation, playListLoader, playerTime }) => ({
+  ({ playerStatus, playList, currentStation, playListLoader, playerTime, onlineStatus, userIntent }) => ({
     playerStatus,
     playList,
     currentStationIndex: currentStation ? currentStation.index : 0,
     currentStation,
     playListLoader,
-    playerTime
+    playerTime,
+    onlineStatus,
+    userIntent
   }),
-  null
+  dispatch => ({
+    updateUserIntent: intent => dispatch(updateUserIntent({intent}))
+  })
 )(Controls)

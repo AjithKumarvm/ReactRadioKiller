@@ -4,6 +4,7 @@ import { updatePlaylist } from '../actions'
 import { playList } from '../dummy'
 import './styles.scss'
 import PlayListControls from './PlayListControls'
+import {updateUserIntent} from '../actions'
 
 class PlayList extends React.PureComponent {
   componentDidMount () {
@@ -24,6 +25,10 @@ class PlayList extends React.PureComponent {
     if (!prevProps.currentStation && this.props.playList.length) {
       this.player.play()({ autoPlay: true })
     }
+  }
+  playListClick = station => () => {
+    this.player.play(station)()
+    this.props.updateUserIntent('PLAY')
   }
   render () {
     if (this.props.playListLoader) {
@@ -48,7 +53,7 @@ class PlayList extends React.PureComponent {
             <div
               className={classNames.join(' ')}
               key={station.id}
-              onClick={this.player.play(station)}
+              onClick={this.playListClick(station)}
             >
               <PlayListControls
                 playerStatus={this.props.playerStatus}
@@ -86,6 +91,7 @@ export default connect(
           dispatch(updatePlaylist({ list: playList.music }))
           console.error('api failed', e)
         })
-    }
+    },
+    updateUserIntent: intent => dispatch(updateUserIntent({intent}))
   })
 )(PlayList)
