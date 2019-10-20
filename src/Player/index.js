@@ -1,21 +1,30 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { updatePlayerStatus, updatePlayerTime, setStation, updateOnlineStatus } from '../actions'
+import {
+  updatePlayerStatus,
+  updatePlayerTime,
+  setStation,
+  updateOnlineStatus
+} from '../actions'
 
 let playerTimeStamp = 0
 class Player extends React.PureComponent {
   componentDidMount () {
     this.player = this.refs.player
-    window.addEventListener('online',  this.updateIndicator)
+    window.addEventListener('online', this.updateIndicator)
     window.addEventListener('offline', this.props.updateIndicator)
   }
   componentWillUnmount () {
-    window.removeEventListener('online',  this.props.updateIndicator)
+    window.removeEventListener('online', this.props.updateIndicator)
     window.removeEventListener('offline', this.props.updateIndicator)
   }
   updateIndicator = () => {
-    if (this.props.playerStatus !== 'PLAYING' && this.props.userIntent === 'PLAY' && window.navigator.onLine) {
-      this.play()({ retry: true })
+    if (
+      this.props.playerStatus !== 'PLAYING' &&
+      this.props.userIntent === 'PLAY' &&
+      window.navigator.onLine
+    ) {
+      setTimeout(() => this.play()({ retry: true }), 1000)
     }
     this.props.updateIndicator()
   }
@@ -34,7 +43,9 @@ class Player extends React.PureComponent {
     const { player } = this.refs
     if (params.autoPlay && localStorage.getItem('currentStationId')) {
       const currentStationId = localStorage.getItem('currentStationId')
-      const filtered = this.props.playList.filter(({ id }) => id === currentStationId)
+      const filtered = this.props.playList.filter(
+        ({ id }) => id === currentStationId
+      )
       if (filtered.length) {
         station = filtered[0]
       }
@@ -91,7 +102,7 @@ export default connect(
       dispatch(updatePlayerTime({ timeStamp: timeStamp - playerTimeStamp }))
     },
     updateIndicator: () => {
-      dispatch(updateOnlineStatus({status: navigator.onLine}))
+      dispatch(updateOnlineStatus({ status: navigator.onLine }))
     }
   }),
   null,
