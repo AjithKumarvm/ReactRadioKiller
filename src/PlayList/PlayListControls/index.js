@@ -13,7 +13,7 @@ export default class PlayListControls extends React.Component{
     render () {
         const classNames = ['playListTriangle']
         classNames.push(this.state.show ? 'play':'stop')
-        return <CSSTransition in={this.state.show && this.props.current} out={!this.state.show} timeout={300} className='playListTriangle'>
+        return <CSSTransition in={this.state.show && this.props.current} timeout={300} className='playListTriangle'>
             <div />
         </CSSTransition> 
     }

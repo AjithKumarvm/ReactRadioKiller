@@ -95,7 +95,6 @@ export default connect(
       dispatch(setStation(station))
     },
     onStatus: status => e => {
-      console.log('onStatus', status, e)
       dispatch(updatePlayerStatus({ status }))
     },
     onTimeUpdate: ({ timeStamp }) => {

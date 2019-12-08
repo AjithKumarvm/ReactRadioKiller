@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { updatePlaylist } from '../actions'
-import { playList } from '../dummy'
 import './styles.scss'
 import PlayListControls from './PlayListControls'
 import {updateUserIntent} from '../actions'
@@ -81,14 +80,15 @@ export default connect(
     getPlayList: () => {
       // fetch('https://www.mocky.io/v2/5d8367f13400003322f4a489')
       fetch(
-        'https://firebasestorage.googleapis.com/v0/b/radio-streamer-6111f.appspot.com/o/playlist.json?alt=media'
+        // 'https://firebasestorage.googleapis.com/v0/b/radio-streamer-6111f.appspot.com/o/playlist.json?alt=media'
+        'playlist.json'
       )
         .then(resp => resp.json())
         .then(resp => {
           dispatch(updatePlaylist({ list: resp.music }))
         })
         .catch(e => {
-          dispatch(updatePlaylist({ list: playList.music }))
+          // dispatch(updatePlaylist({ list: playList.music }))
           console.error('api failed', e)
         })
     },
