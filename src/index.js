@@ -8,8 +8,6 @@ import * as serviceWorker from './serviceWorker'
 import { reducer } from './reducer'
 
 const store = createStore(reducer)
-// window.store = store
-
 
 ReactDOM.render(
   <Provider store={store}>

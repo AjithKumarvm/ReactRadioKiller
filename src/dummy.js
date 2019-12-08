@@ -1,7 +1,6 @@
 export const playList = {
   music: [
     {
-      id: 'helloradio',
       title: 'Hello Radio 90.8',
       album: 'Malayalam',
       artist: 'Kidney federation of India',
@@ -12,10 +11,10 @@ export const playList = {
       trackNumber: 1,
       totalTrackCount: 1,
       duration: 9999,
-      site: 'http://www.helloradio.in/'
+      site: 'http://www.helloradio.in/',
+      id: 'helloradio'
     },
     {
-      id: 'theeram',
       title: 'Theeram Radio',
       album: 'Malayalam',
       artist: 'Theeram',
@@ -25,10 +24,10 @@ export const playList = {
       trackNumber: 2,
       totalTrackCount: 1,
       duration: 9999,
-      site: 'http://radiosindia.com/theeramradio.html'
+      site: 'http://radiosindia.com/theeramradio.html',
+      id: 'theeram'
     },
     {
-      id: 'whtz',
       title: 'WHTZ-FM - Z100',
       album: 'live',
       artist: 'International',
@@ -38,10 +37,10 @@ export const playList = {
       trackNumber: 3,
       totalTrackCount: 1,
       duration: 9999,
-      site: 'http://whtzfm.radio.net/'
+      site: 'http://whtzfm.radio.net/',
+      id: 'whtz'
     },
     {
-      id: 'shakti',
       title: 'Shakti FM',
       album: 'Tamil',
       artist: 'Shakti',
@@ -51,10 +50,10 @@ export const playList = {
       trackNumber: 4,
       totalTrackCount: 1,
       duration: 9999,
-      site: 'https://onlineradios.in/shakti/'
+      site: 'https://onlineradios.in/shakti/',
+      id: 'shakti'
     },
     {
-      id: 'mirchi',
       title: 'Radio Mirchi 98.3',
       album: 'Hindi',
       artist: 'Radio Mirchi',
@@ -64,10 +63,10 @@ export const playList = {
       trackNumber: 5,
       totalTrackCount: 1,
       duration: 9999,
-      site: 'https://onlineradios.in/mirchi-fm/'
+      site: 'https://onlineradios.in/mirchi-fm/',
+      id: 'mirchi'
     },
     {
-      id: 'club',
       title: 'Club FM UAE',
       album: 'Malayalam',
       artist: 'Club FM',
@@ -77,10 +76,10 @@ export const playList = {
       trackNumber: 6,
       totalTrackCount: 1,
       duration: 9999,
-      site: 'https://radiosindia.com/clubfm.html'
+      site: 'https://radiosindia.com/clubfm.html',
+      id: 'club'
     },
     {
-      id: 'asianet',
       title: 'Asianet Radio Dubai',
       album: 'Malayalam',
       artist: 'Asianet Radio',
@@ -90,10 +89,10 @@ export const playList = {
       trackNumber: 7,
       totalTrackCount: 1,
       duration: 9999,
-      site: 'https://radiosindia.com/asianetradio.html'
+      site: 'https://radiosindia.com/asianetradio.html',
+      id: 'asianet'
     },
     {
-      id: 'radiokerala',
       title: 'Radio Kerala',
       album: 'Malayalam',
       artist: 'Radio Kerala',
@@ -103,7 +102,100 @@ export const playList = {
       trackNumber: 8,
       totalTrackCount: 1,
       duration: 9999,
-      site: 'https://radiosindia.com/radiokerala.html'
+      site: 'https://radiosindia.com/radiokerala.html',
+      id: 'radiokerala'
+    },
+    {
+      title: 'Gaanam Radio',
+      album: 'Malayalam',
+      artist: 'Gaanam Radio',
+      genre: 'Malayalam',
+      source: 'http://5.79.88.132:7104/;',
+      image:
+        'https://cdn.webrad.io/images/logos/onlineradios-in/ganam-malayalam.png',
+      trackNumber: 9,
+      totalTrackCount: 1,
+      duration: 9999,
+      site: 'https://onlineradios.in/region/malayalam/#ganam-malayalam',
+      id: 'gaanamradio'
+    },
+    {
+      title: 'Tulip Radio',
+      album: 'Telugu',
+      artist: 'Tulip Radio',
+      genre: 'Telugu',
+      source: 'http://perseus.shoutca.st:8141/stream',
+      image: 'https://radiosindia.com/images/tulipradio.jpg',
+      trackNumber: 10,
+      totalTrackCount: 1,
+      duration: 9999,
+      site: 'https://radiosindia.com/tulipradio.html',
+      id: 'tulippradio'
+    },
+    {
+      title: 'AIR Malayalam',
+      album: 'Malayalam',
+      artist: 'AIR Malayalam',
+      genre: 'Malayalam',
+      source: 'http://51.15.208.163:8081/radio/airmalayalam/icecast.audio',
+      image: 'https://radiosindia.com/images/air.jpg',
+      trackNumber: 11,
+      totalTrackCount: 1,
+      duration: 9999,
+      site: 'https://radiosindia.com/airmalayalam.html',
+      id: 'airmalayalam'
+    },
+    {
+      title: 'Radio Mango UAE',
+      album: 'Malayalam',
+      artist: 'Radio Mango',
+      genre: 'Malayalam',
+      source: 'http://51.15.208.163:8081/radio/RadioMango_1/icecast.audio',
+      image: 'https://radiosindia.com/images/radiomango.jpg',
+      trackNumber: 12,
+      totalTrackCount: 1,
+      duration: 9999,
+      site: 'https://radiosindia.com/radiomango.html',
+      id: 'radiomangouae'
+    },
+    {
+      title: 'Mazhavil FM UAE',
+      album: 'Malayalam',
+      artist: 'Mazhavil FM UAE',
+      genre: 'Malayalam',
+      source: 'http://mazhavilfm.out.airtime.pro:8000/mazhavilfm_a',
+      image: 'https://radiosindia.com/images/mazhavilfm.jpg',
+      trackNumber: 13,
+      totalTrackCount: 1,
+      duration: 9999,
+      site: 'https://radiosindia.com/mazhavilfm.html',
+      id: 'mazhavilfmuae'
+    },
+    {
+      title: 'Suryan UAE',
+      album: 'Tamil',
+      artist: 'Suryan FM',
+      genre: 'Tamil',
+      source: 'http://209.133.216.3:7071/;stream.mp3',
+      image: 'https://radiosindia.com/images/suryanfm.jpg',
+      trackNumber: 14,
+      totalTrackCount: 1,
+      duration: 9999,
+      site: 'https://radiosindia.com/suryanfm.html',
+      id: 'suryanfm'
+    },
+    {
+      title: 'Radio City Tamil',
+      album: 'Tamil',
+      artist: 'Radio City Tamil',
+      genre: 'Tamil',
+      source: 'http://prclive1.listenon.in:9948/;',
+      image: 'https://radiosindia.com/images/radiocity.jpg',
+      trackNumber: 15,
+      totalTrackCount: 1,
+      duration: 9999,
+      site: 'https://radiosindia.com/radiocitytamil.html',
+      id: 'radiocitytamil'
     }
   ]
 }
