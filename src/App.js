@@ -20,7 +20,8 @@ class App extends React.PureComponent {
     this.player.current.play(station)()
   }
   getPlayer = () => this.player.current
-  offlineMessage = () => !this.props.onlineStatus ? (
+  offlineMessage = () =>
+    !this.props.onlineStatus ? (
       <div className='offlineMessage'>
         YOU ARE OFFLINE, MUSIC WILL RESUME WHEN YOU ARE ONLINE
       </div>
@@ -37,6 +38,15 @@ class App extends React.PureComponent {
               <Controls getPlayer={this.getPlayer} />
             </div>
           </CSSTransition>
+        </div>
+        <div className='playLink'>
+          <a target='_blank' href='https://play.google.com/store/apps/details?id=com.vilvan.android.radiokiller&utm_source=radiokillerpage&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+            <img
+              alt='Get it on Google Play'
+              height='60'
+              src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'
+            />
+          </a>
         </div>
         <this.offlineMessage />
       </>
