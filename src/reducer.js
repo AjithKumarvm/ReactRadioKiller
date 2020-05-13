@@ -6,7 +6,11 @@ const defaultState = {
   playList: [],
   currentStation: null,
   onlineStatus: navigator.onLine,
-  userIntent: 'PLAY'
+  userIntent: 'PLAY',
+  gDrive: {
+    loginStatus: 'loading',
+    files: []
+  }
 }
 
 const reducer = (state = defaultState, action) => {
@@ -52,6 +56,27 @@ const reducer = (state = defaultState, action) => {
       return {
         ...state,
         userIntent: action.intent
+      }
+    }
+
+    case 'UPDATE_GDRIVE_LOGIN_STATUS': {
+      return {
+        ...state,
+        gDrive: {
+          ...state.gDrive,
+          loginStatus: action.loginStatus
+        }
+      }
+    }
+
+    case 'UPDATE_FILES': {
+      return {
+        ...state,
+        gDrive: {
+          ...state.gDrive,
+          files: [...state.gDrive.files, ...action.files],
+          nextPageToken: action.nextPageToken
+        }
       }
     }
 

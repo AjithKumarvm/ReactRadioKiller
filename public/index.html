@@ -32,21 +32,42 @@
 
     gtag('config', 'G-0PF5WJF4KC');
   </script>
+  <script>
+    window.globals = {}
+  </script>
 </head>
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
-  <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+  <audio id='player' controls></audio>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+  <script type="text/javascript">
+    function handleClientLoad() {
+      // gapi.load('client:auth2', initClient);
+      if (window.globals && window.globals.initGDrive) {
+        console.log('loaded late')
+        window.globals.initGDrive()
+      }
+    }
+  </script>
+  <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()"
+    onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+    <script>
+      if('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/drive_worker.js')
+          .then(function(registration) {
+                console.log('Service Worker Registered', registration);
+          }).catch((e) => {
+            console.error('SW error', e)
+          });
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+        navigator.serviceWorker.ready.then(function(registration) {
+           console.log('SW Ready', registration)
+        });
+      }
+      </script>
 </body>
 
 </html>

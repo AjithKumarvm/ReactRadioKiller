@@ -6,6 +6,7 @@ import './App.scss'
 import PlayList from './PlayList'
 import Player from './Player'
 import Controls from './Controls'
+import GDrive from './GDrive'
 class App extends React.PureComponent {
   state = {
     show: false
@@ -34,7 +35,8 @@ class App extends React.PureComponent {
           <CSSTransition in={this.state.show} timeout={300} classNames='rkAnim'>
             <div className='rkContainer'>
               <Player ref={this.player} />
-              <PlayList play={this.play} getPlayer={this.getPlayer} />
+              <GDrive play={this.play} getPlayer={this.getPlayer} />
+              {/* <PlayList play={this.play} getPlayer={this.getPlayer} /> */}
               <Controls getPlayer={this.getPlayer} />
             </div>
           </CSSTransition>
