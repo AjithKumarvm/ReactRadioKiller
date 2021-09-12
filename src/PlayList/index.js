@@ -81,7 +81,7 @@ export default connect(
       // fetch('https://www.mocky.io/v2/5d8367f13400003322f4a489')
       fetch(
         // 'https://firebasestorage.googleapis.com/v0/b/radio-streamer-6111f.appspot.com/o/playlist.json?alt=media'
-        'playlist.json'
+        'https://ajithkumarvm.github.io/radiokiller/playlist.json'
       )
         .then(resp => resp.json())
         .then(resp => {
